@@ -15,21 +15,23 @@ const char *nombresMaterias[7] = {
 };
 
 // Declaración de funciones
-int Menu(int flag, int*** AlumnosMatriculados);
+int Menu(int flag);
 void IngresoAlumnos();
-void Opcion1(int*** AlumnosMatriculados);
-void Opcion2(int*** AlumnosMatriculados);
-void Opcion3(int*** AlumnosMatriculados);
+void Opcion1();
+void Opcion2();
+void Opcion3();
 
 FILE* archivo;
+
+int n_carreras, n_anos, n_periodos;
+
+int*** AlumnosMatriculados;
 
 int main(){
 
     // Configuración de la localidad del programa
     setlocale(LC_ALL, "");
-    int flag = 1, n_carreras, n_anos, n_periodos;
-
-    int*** AlumnosMatriculados;
+    int flag = 1;
 
     archivo = fopen("Datos.csv", "w+");
 
@@ -39,12 +41,10 @@ int main(){
     printf("Ingrese el numero de años a registrar (1-5)");
     scanf("%d", &n_anos);
 
-    printf("Ingrese el numero de periodos (1-2)")
+    printf("Ingrese el numero de periodos (1-2)");
     scanf("%d", &n_periodos);
 
     AlumnosMatriculados = (int***)malloc(n_carreras * sizeof(int**));
-
-    void IngresoAlumnos(){
     for(int i = 0; i <5; i++){
 
         AlumnosMatriculados[i] = (int**)malloc(n_anos * sizeof(int*));
@@ -61,11 +61,12 @@ int main(){
         }
     }
 
+
     IngresoAlumnos();
     
     // Muestra el menú hasta que el usuario decida salir
     while (flag) {
-        flag = Menu(flag, AlumnosMatriculados);
+        flag = Menu(flag);
     }
    
     return 0;
@@ -77,14 +78,14 @@ void IngresoAlumnos(){
             for(int k = 0; k < 2; k++){
                 printf("Ingrese la cantidad de alumnos que ingresaron la carrera %d en el año %s en el semestre %d", i+1, nombresMaterias[j], k+1);
                 scanf("%d", &AlumnosMatriculados[i][j][k]);
-                fprintf("");
+                fprintf(archivo, "%d", AlumnosMatriculados[i][j][k]);
             }
         }
     }
 }
 
 // Función que muestra el menú al usuario
-int Menu(int flag, int AlumnosMatriculados[5][7][2]){
+int Menu(int flag){
 
     int menu, resultado;
 
@@ -105,15 +106,15 @@ int Menu(int flag, int AlumnosMatriculados[5][7][2]){
     {
     case 1:
         system("cls");
-        Opcion1(AlumnosMatriculados);
+        Opcion1();
         break;
     case 2:
         system("cls");
-        Opcion2(AlumnosMatriculados);
+        Opcion2();
         break;
     case 3:
         system("cls");
-        Opcion3(AlumnosMatriculados);
+        Opcion3();
         break;
     case 4:
         system("cls");
@@ -128,7 +129,7 @@ int Menu(int flag, int AlumnosMatriculados[5][7][2]){
 }
 
 // Función que encuentra y muestra el año en el quese matricularon más alumnos
-void Opcion1(int AlumnosMatriculados[5][7][2]){
+void Opcion1(){
 
     int max;
     int cantidadMax[5] = {0};
@@ -155,7 +156,7 @@ void Opcion1(int AlumnosMatriculados[5][7][2]){
 
 }
     //Función que encuentra y muestra la carrera que tuvo la mayor cantidad de alumnos en el último año
-    void Opcion2(int AlumnosMatriculados[5][7][2]){
+    void Opcion2(){
 
     int max;
     int cantidadMax[7];
@@ -182,7 +183,7 @@ void Opcion1(int AlumnosMatriculados[5][7][2]){
 
 }
     //Función que encuentra y muestra el año en el que se matricularon más alumnos en Ingeniería de Software
-    void Opcion3(int AlumnosMatriculados[5][7][2]){
+    void Opcion3(){
 
     int max;
     int cantidadMax[5];
