@@ -72,17 +72,19 @@ int main(){
     return 0;
 }
 
-void IngresoAlumnos(){
-    for(int i = 0; i < n_carreras; i++){
-        for(int j = 0; j < 7; j++){
-            for(int k = 0; k < 2; k++){
-                printf("Ingrese la cantidad de alumnos que ingresaron la carrera %d en el año %s en el semestre %d", i+1, nombresMaterias[j], k+1);
+void IngresoAlumnos() {
+    for (int i = 0; i < n_carreras; i++) {
+        for (int j = 0; j < 7; j++) {
+            for (int k = 0; k < 2; k++) {
+                printf("Ingrese la cantidad de alumnos que ingresaron la carrera %d en el año %s en el semestre %d: ", i + 1, nombresMaterias[j], k + 1);
                 scanf("%d", &AlumnosMatriculados[i][j][k]);
-                fprintf(archivo, "%d", AlumnosMatriculados[i][j][k]);
+                fprintf(archivo, "%d,", AlumnosMatriculados[i][j][k]);
             }
         }
     }
+    fprintf(archivo, "\n");
 }
+
 
 // Función que muestra el menú al usuario
 int Menu(int flag){
